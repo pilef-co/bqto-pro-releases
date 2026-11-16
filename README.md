@@ -8,8 +8,8 @@ Google Cloud services from your laptop and from CI.
 
 ## 1. Get a key
 
-Buy a seat at [bqto.dev](https://bqto.dev). You get your license key on the
-page after you pay and by email.
+Buy a seat at [bqto.dev](https://bqto.dev). A seat is one person. You get your
+license key on the page after you pay and in your Polar customer portal.
 
 ## 2. Install
 
@@ -19,13 +19,17 @@ bqto Pro, on macOS or Linux:
 curl -fsSL https://raw.githubusercontent.com/pilef-co/bqto-pro-releases/main/install.sh | sh
 ```
 
+It installs `bqto` in `/usr/local/bin`, and asks for your password when that
+folder needs it. To use another folder, set `BQTO_INSTALL_DIR`. If you have the
+free bqto from Homebrew, remove it first: `brew uninstall --cask bqto`.
+
 The Mac app:
 
 ```sh
 curl -fsSL https://raw.githubusercontent.com/pilef-co/bqto-pro-releases/main/install.sh | sh -s -- --app
 ```
 
-With Homebrew:
+With Homebrew, bqto Pro and then the Mac app:
 
 ```sh
 brew install --cask pilef-co/tap/bqto-pro
@@ -38,8 +42,9 @@ brew install --cask pilef-co/tap/bqto-app
 bqto license activate YOUR-KEY
 ```
 
-In the app, enter the key when it asks. In GitHub Actions, pass the key to
-[bqto-action](https://github.com/pilef-co/bqto-action) in `license-key`.
+In the app, enter the key when it asks. In GitHub Actions (CI), give
+[bqto-action](https://github.com/pilef-co/bqto-action) `edition: pro` and the
+key in `license-key`.
 
 Without a valid key, bqto Pro works as the free bqto.
 

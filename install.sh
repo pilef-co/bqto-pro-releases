@@ -101,6 +101,10 @@ main() {
 		sudo mv "$tmp/bqto" "$dir/bqto"
 	fi
 	echo "installed bqto Pro $version in $dir/bqto"
+	found=$(command -v bqto || true)
+	if [ -n "$found" ] && [ "$found" != "$dir/bqto" ]; then
+		echo "warn: bqto runs $found first, not $dir/bqto; remove the other one (brew uninstall --cask bqto), or put $dir first on your PATH" >&2
+	fi
 	echo "next: bqto license activate YOUR-KEY"
 	case ":$PATH:" in
 	*":$dir:"*) ;;
