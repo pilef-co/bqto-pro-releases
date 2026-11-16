@@ -42,9 +42,7 @@ brew install --cask pilef-co/tap/bqto-app
 bqto license activate YOUR-KEY
 ```
 
-In the app, enter the key when it asks. In GitHub Actions (CI), give
-[bqto-action](https://github.com/pilef-co/bqto-action) `edition: pro` and the
-key in `license-key`.
+In the app, enter the key when it asks.
 
 Without a valid key, bqto Pro works as the free bqto.
 

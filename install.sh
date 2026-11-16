@@ -49,7 +49,7 @@ main() {
 		release=$(get "$api/tags/$tag") || fail "no release $tag" "pick one from https://github.com/$repo/releases"
 	else
 		releases=$(get "$api?per_page=30") || fail "could not read the releases from GitHub" "check your connection, or set GITHUB_TOKEN when GitHub limits requests from your address"
-		tag=$(printf '%s\n' "$releases" | sed -n "s/^    \"tag_name\": \"\(${prefix}[^\"]*\)\",\$/\1/p" | head -n 1)
+		tag=$(printf '%s\n' "$releases" | sed -n "s/^    \"tag_name\": \"\(${prefix}[0-9][0-9]*\.[0-9][0-9]*\.[0-9][0-9]*\)\",\$/\1/p" | head -n 1)
 		[ -n "$tag" ] || fail "no $what release yet" "see https://github.com/$repo/releases"
 		release=$(get "$api/tags/$tag") || fail "could not read release $tag" "run it again"
 	fi
@@ -71,7 +71,8 @@ main() {
 	asset "$file"
 	asset checksums.txt
 
-	want=$(grep " $file\$" "$tmp/checksums.txt" | cut -d' ' -f1 || true)
+	want=$(grep " $file\$" "$tmp/checksums.txt" | cut -d' ' -f1)
+	[ -n "$want" ] || fail "checksums.txt of $tag has no line for $file" "download it from https://github.com/$repo/releases"
 	if command -v sha256sum >/dev/null; then
 		got=$(sha256sum "$tmp/$file" | cut -d' ' -f1)
 	else
@@ -92,6 +93,7 @@ main() {
 	fi
 
 	dir=${BQTO_INSTALL_DIR:-/usr/local/bin}
+	dir=${dir%/}
 	tar -xzf "$tmp/$file" -C "$tmp" bqto
 	if [ -w "$dir" ] || { [ ! -e "$dir" ] && mkdir -p "$dir" 2>/dev/null; }; then
 		mv "$tmp/bqto" "$dir/bqto"
@@ -102,14 +104,15 @@ main() {
 	fi
 	echo "installed bqto Pro $version in $dir/bqto"
 	found=$(command -v bqto || true)
-	if [ -n "$found" ] && [ "$found" != "$dir/bqto" ]; then
-		echo "warn: bqto runs $found first, not $dir/bqto; remove $found, or put $dir first on your PATH" >&2
-	fi
-	echo "next: bqto license activate YOUR-KEY"
 	case ":$PATH:" in
-	*":$dir:"*) ;;
+	*":$dir:"*)
+		if [ -n "$found" ] && [ "$found" != "$dir/bqto" ]; then
+			echo "warn: bqto runs $found first, not $dir/bqto; remove $found, or put $dir first on your PATH" >&2
+		fi
+		;;
 	*) echo "warn: $dir is not on your PATH; add it, or run $dir/bqto" >&2 ;;
 	esac
+	echo "next: bqto license activate YOUR-KEY"
 }
 
 main "$@"
