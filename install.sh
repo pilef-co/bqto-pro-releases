@@ -93,7 +93,7 @@ main() {
 	fi
 
 	dir=${BQTO_INSTALL_DIR:-/usr/local/bin}
-	dir=${dir%/}
+	while [ "$dir" != / ] && [ "${dir%/}" != "$dir" ]; do dir=${dir%/}; done
 	tar -xzf "$tmp/$file" -C "$tmp" bqto
 	if [ -w "$dir" ] || { [ ! -e "$dir" ] && mkdir -p "$dir" 2>/dev/null; }; then
 		mv "$tmp/bqto" "$dir/bqto"
