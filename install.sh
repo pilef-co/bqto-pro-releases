@@ -71,7 +71,7 @@ main() {
 	asset "$file"
 	asset checksums.txt
 
-	want=$(grep " $file\$" "$tmp/checksums.txt" | cut -d' ' -f1)
+	want=$(grep " $file\$" "$tmp/checksums.txt" | cut -d' ' -f1 || true)
 	if command -v sha256sum >/dev/null; then
 		got=$(sha256sum "$tmp/$file" | cut -d' ' -f1)
 	else
@@ -103,7 +103,7 @@ main() {
 	echo "installed bqto Pro $version in $dir/bqto"
 	found=$(command -v bqto || true)
 	if [ -n "$found" ] && [ "$found" != "$dir/bqto" ]; then
-		echo "warn: bqto runs $found first, not $dir/bqto; remove the other one (brew uninstall --cask bqto), or put $dir first on your PATH" >&2
+		echo "warn: bqto runs $found first, not $dir/bqto; remove $found, or put $dir first on your PATH" >&2
 	fi
 	echo "next: bqto license activate YOUR-KEY"
 	case ":$PATH:" in
