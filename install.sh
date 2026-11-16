@@ -40,7 +40,7 @@ main() {
 		arm64 | aarch64) arch=arm64 ;;
 		*) fail "bqto Pro has no build for $(uname -m)" "use an amd64 or arm64 machine" ;;
 		esac
-		prefix=bqto-pro-v
+		prefix=v
 	fi
 
 	api=https://api.github.com/repos/$repo/releases
