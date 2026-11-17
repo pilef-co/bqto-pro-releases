@@ -1,8 +1,6 @@
 #!/bin/sh
-# Installs bqto Pro:      curl -fsSL https://raw.githubusercontent.com/pilef-co/bqto-pro-releases/main/install.sh | sh
-# Installs the Mac app:   curl -fsSL https://raw.githubusercontent.com/pilef-co/bqto-pro-releases/main/install.sh | sh -s -- --app
-# BQTO_VERSION=0.12.0 picks a release, BQTO_INSTALL_DIR a folder for bqto (default /usr/local/bin),
-# and GITHUB_TOKEN avoids GitHub's rate limit for anonymous requests.
+# Installs bqto Pro, or the Mac app with --app. The README of this repository shows how to run it.
+# BQTO_VERSION picks a release, BQTO_INSTALL_DIR the folder for bqto, and GITHUB_TOKEN avoids GitHub's limit for anonymous requests.
 set -eu
 
 main() {
