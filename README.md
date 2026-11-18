@@ -8,7 +8,7 @@ Google Cloud services from your laptop and from CI.
 
 ## 1. Get a key
 
-Buy a seat at [bqto.dev](https://bqto.dev). A seat is one person. You get your
+Buy a seat on the [bqto Pro pricing page](https://bqto.dev/pricing). A seat is one person. You get your
 license key on the page after you pay and in your Polar customer portal.
 
 ## 2. Install
