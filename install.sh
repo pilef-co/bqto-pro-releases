@@ -76,7 +76,7 @@ main() {
 	else
 		got=$(shasum -a 256 "$tmp/$file" | cut -d' ' -f1)
 	fi
-	[ -n "$want" ] && [ "$want" = "$got" ] || fail "the SHA-256 of $file does not match checksums.txt" "run it again; if it still fails, write to Pilef through https://bqto.dev"
+	[ -n "$want" ] && [ "$want" = "$got" ] || fail "the SHA-256 of $file does not match checksums.txt" "run it again; if it still fails, write to hello@pilef.co"
 
 	if [ "$what" = app ]; then
 		dir=/Applications
