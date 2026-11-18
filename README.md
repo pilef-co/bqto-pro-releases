@@ -15,8 +15,9 @@ license key on the page after you pay and in your Polar customer portal.
 
 The script installs `bqto` in `/usr/local/bin`. If that folder needs your
 password, the script asks for it. To use another folder, set `BQTO_INSTALL_DIR`.
-If you have the free bqto from Homebrew, remove it first with
-`brew uninstall --cask bqto`.
+It replaces a free bqto that is already in that folder. If you have the free
+bqto from Homebrew, remove it first with `brew uninstall --cask bqto`. If
+another bqto comes first on your PATH, the script tells you.
 
 bqto Pro, on macOS or Linux, with curl:
 
