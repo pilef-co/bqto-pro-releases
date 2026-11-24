@@ -44,7 +44,7 @@ brew install --cask pilef-co/tap/bqto-app
 bqto license activate -
 ```
 
-Paste your key, then press Ctrl-D. This way the key does not stay in your shell history.
+Paste your key and press Enter. This way the key does not stay in your shell history.
 
 The short form also works:
 
